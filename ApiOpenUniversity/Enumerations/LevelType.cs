@@ -2,8 +2,9 @@
 {
     public enum LevelType
     {
-        Basico,
-        Intermedio, 
-        Avanzado
+        Basic,
+        Medium, 
+        Advanced,
+        Expert
     }
 }
