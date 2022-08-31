@@ -2,7 +2,7 @@
 
 namespace ApiOpenUniversity.Models
 {
-    public class Student
+    public class Student : BaseEntity
     {
         [Required]
         public string FirtsName { get; set; } = string.Empty;
