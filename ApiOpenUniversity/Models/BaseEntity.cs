@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiOpenUniversity.Enumerations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiOpenUniversity.Models
 {
@@ -7,12 +8,11 @@ namespace ApiOpenUniversity.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        public string CreatedBy { get; set; } = string.Empty;
-        public string UpdatedBy { get; set; } = string.Empty;
-        public string DeletedBy { get; set; } = string.Empty;
+        public int UserId { get; set; }
+        public virtual User LastActionBy { get; set; } = new User();
+        public ActionModel LastAction { get; set; } = ActionModel.Create;
+        public DateTime? LastActionAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeleteAt { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }
