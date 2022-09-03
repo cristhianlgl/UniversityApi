@@ -8,8 +8,8 @@ namespace ApiOpenUniversity.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public virtual User LastActionBy { get; set; } = new User();
+        public int? UserId { get; set; }
+        public virtual User? LastActionBy { get; set; } = new User();
         public ActionModel LastAction { get; set; } = ActionModel.Create;
         public DateTime? LastActionAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

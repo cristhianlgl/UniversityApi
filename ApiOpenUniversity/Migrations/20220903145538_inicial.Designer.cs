@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiOpenUniversity.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220831211042_updateTableUser_baseEntity")]
-    partial class updateTableUser_baseEntity
+    [Migration("20220903145538_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace ApiOpenUniversity.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -86,7 +86,7 @@ namespace ApiOpenUniversity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -135,7 +135,7 @@ namespace ApiOpenUniversity.Migrations
                         .HasMaxLength(280)
                         .HasColumnType("nvarchar(280)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -176,7 +176,7 @@ namespace ApiOpenUniversity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -215,7 +215,7 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastActionById")
+                    b.Property<int?>("LastActionById")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -227,7 +227,7 @@ namespace ApiOpenUniversity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -271,9 +271,7 @@ namespace ApiOpenUniversity.Migrations
                 {
                     b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("LastActionBy");
                 });
@@ -288,9 +286,7 @@ namespace ApiOpenUniversity.Migrations
 
                     b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Course");
 
@@ -301,9 +297,7 @@ namespace ApiOpenUniversity.Migrations
                 {
                     b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("LastActionBy");
                 });
@@ -312,9 +306,7 @@ namespace ApiOpenUniversity.Migrations
                 {
                     b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("LastActionBy");
                 });
@@ -323,9 +315,7 @@ namespace ApiOpenUniversity.Migrations
                 {
                     b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
                         .WithMany()
-                        .HasForeignKey("LastActionById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LastActionById");
 
                     b.Navigation("LastActionBy");
                 });
