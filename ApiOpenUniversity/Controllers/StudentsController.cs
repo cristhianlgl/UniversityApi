@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiOpenUniversity.DataBase;
 using ApiOpenUniversity.Models;
+using ApiOpenUniversity.Services;
 
 namespace ApiOpenUniversity.Controllers
 {
@@ -15,10 +16,12 @@ namespace ApiOpenUniversity.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IStudentService _studentService;
 
-        public StudentsController(AppDbContext context)
+        public StudentsController(AppDbContext context, IStudentService studentService)
         {
             _context = context;
+            _studentService = studentService;
         }
 
         // GET: api/Students

@@ -1,19 +1,26 @@
+// 1. usings to work with  EntityFramework
 using ApiOpenUniversity.DataBase;
+using ApiOpenUniversity.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// Get ConnetionString to settings
+//2.  Get ConnetionString to settings
 string conn = builder.Configuration.GetConnectionString("default");
-// add DbContext
+
+//3. add DbContext
 builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(conn);
 });
 
 
 builder.Services.AddControllers();
+
+//4. add services
+builder.Services.AddScoped<IStudentService, StudentService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
