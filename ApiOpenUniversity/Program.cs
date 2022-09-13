@@ -21,6 +21,17 @@ builder.Services.AddControllers();
 //4. add services
 builder.Services.AddScoped<IStudentService, StudentService>();
 
+//5. cors configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "corsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,5 +50,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// 6. tell app to use cors
+app.UseCors("corsPolicy");
 
 app.Run();
