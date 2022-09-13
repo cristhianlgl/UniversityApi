@@ -2,19 +2,19 @@
 
 namespace ApiOpenUniversity.Services
 {
-    public class StudentService : IStudentService
+    public class CourseServices : ICourseService
     {
-        public IEnumerable<Student> GetByCourse(Course course)
+        public IEnumerable<Course> GetByCategory(Category category)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Student> GetStudentsWithCourse()
+        public IEnumerable<Course> GetByStudent(Student student)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Student> GetStudentsWithNotCourse()
+        public IEnumerable<Course> GetWithOutChapters()
         {
             throw new NotImplementedException();
         }

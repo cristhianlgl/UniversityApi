@@ -6,5 +6,6 @@ namespace ApiOpenUniversity.Services
     {
         IEnumerable<Student> GetStudentsWithCourse();
         IEnumerable<Student> GetStudentsWithNotCourse();
+        IEnumerable<Student> GetByCourse(Course course);
     }
 }

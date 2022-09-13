@@ -42,6 +42,10 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LastActionBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -51,8 +55,6 @@ namespace ApiOpenUniversity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Categories");
                 });
@@ -80,6 +82,10 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LastActionBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("List")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -90,8 +96,6 @@ namespace ApiOpenUniversity.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Chapters");
                 });
@@ -120,6 +124,10 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LastActionBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -137,8 +145,6 @@ namespace ApiOpenUniversity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -170,6 +176,10 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LastActionBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -178,8 +188,6 @@ namespace ApiOpenUniversity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -213,8 +221,9 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime?>("LastActionAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LastActionById")
-                        .HasColumnType("int");
+                    b.Property<string>("LastActionBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -229,8 +238,6 @@ namespace ApiOpenUniversity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LastActionById");
 
                     b.ToTable("Users");
                 });
@@ -265,15 +272,6 @@ namespace ApiOpenUniversity.Migrations
                     b.ToTable("CourseStudent");
                 });
 
-            modelBuilder.Entity("ApiOpenUniversity.Models.Category", b =>
-                {
-                    b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("LastActionBy");
-                });
-
             modelBuilder.Entity("ApiOpenUniversity.Models.Chapter", b =>
                 {
                     b.HasOne("ApiOpenUniversity.Models.Course", "Course")
@@ -282,40 +280,7 @@ namespace ApiOpenUniversity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Course");
-
-                    b.Navigation("LastActionBy");
-                });
-
-            modelBuilder.Entity("ApiOpenUniversity.Models.Course", b =>
-                {
-                    b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("LastActionBy");
-                });
-
-            modelBuilder.Entity("ApiOpenUniversity.Models.Student", b =>
-                {
-                    b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("LastActionBy");
-                });
-
-            modelBuilder.Entity("ApiOpenUniversity.Models.User", b =>
-                {
-                    b.HasOne("ApiOpenUniversity.Models.User", "LastActionBy")
-                        .WithMany()
-                        .HasForeignKey("LastActionById");
-
-                    b.Navigation("LastActionBy");
                 });
 
             modelBuilder.Entity("CategoryCourse", b =>
