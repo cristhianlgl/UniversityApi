@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiOpenUniversity", "ApiOpenUniversity\ApiOpenUniversity.csproj", "{9A5BE185-9B26-4D80-B844-0ED6913616DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqSnippets", "LinqSnippets\LinqSnippets.csproj", "{18123AA0-62E2-48F9-A5E5-ABAACC6E36A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqSnippets", "LinqSnippets\LinqSnippets.csproj", "{18123AA0-62E2-48F9-A5E5-ABAACC6E36A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

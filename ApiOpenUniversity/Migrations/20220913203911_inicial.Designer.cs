@@ -165,7 +165,7 @@ namespace ApiOpenUniversity.Migrations
                     b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirtsName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -209,7 +209,7 @@ namespace ApiOpenUniversity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirtsName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");

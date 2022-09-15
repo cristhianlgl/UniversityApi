@@ -15,6 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(conn);
 });
 
+//TODO: 
+// 7. add services of JWT authorization
 
 builder.Services.AddControllers();
 
@@ -34,6 +36,8 @@ builder.Services.AddCors(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//add config swagger to take care of authorization of JWT 
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
