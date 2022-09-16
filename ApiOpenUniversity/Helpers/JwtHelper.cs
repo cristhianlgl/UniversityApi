@@ -20,11 +20,11 @@ namespace ApiOpenUniversity.Helpers
 
             };
 
-            if (userAccount.UserName == "Admin")
+            if (userAccount.UserName.ToLower() == "admin")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
             }
-            else if (userAccount.UserName == "User1")
+            else if (userAccount.UserName.ToLower() == "user1")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "User"));
                 claims.Add(new Claim("UserOnly", "User 1"));

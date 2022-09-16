@@ -29,7 +29,7 @@ namespace ApiOpenUniversity.Controllers
             new User()
             { 
                 Id = 2,
-                FirtsName = "user",
+                FirtsName = "user1",
                 Password = "12345",
                 Email = "admin@correo.com"
             }
@@ -62,10 +62,11 @@ namespace ApiOpenUniversity.Controllers
         }
 
         [HttpGet]
-        [Authorize(JwtBearerDefaults.AuthenticationScheme, Roles = "Administration")]
+        [Authorize( AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                    Roles = "Administrator")]
         public IActionResult GetUserList()
         {
-            return Ok();
+            return Ok(Logins);
         }
 
     }

@@ -1,7 +1,9 @@
 // 1. usings to work with  EntityFramework
 using ApiOpenUniversity.DataBase;
+using ApiOpenUniversity.ExtensionMethods;
 using ApiOpenUniversity.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +19,18 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 
 //TODO: 
 // 7. add services of JWT authorization
+builder.Services.AddJwtTokenServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
 //4. add services
 builder.Services.AddScoped<IStudentService, StudentService>();
+
+//8. add Authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserOnlyPolicy", policy => policy.RequireClaim("UserOnly", "User1"));
+});
 
 //5. cors configuration
 builder.Services.AddCors(options =>
@@ -37,8 +46,35 @@ builder.Services.AddCors(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-//add config swagger to take care of authorization of JWT 
-builder.Services.AddSwaggerGen();
+//9. add config swagger to take care of authorization of JWT 
+builder.Services.AddSwaggerGen(options => 
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT authorization header using bearer scheme"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme()
+            {
+                Reference = new OpenApiReference()
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[]{ }
+        }
+    });
+    
+});
 
 var app = builder.Build();
 
