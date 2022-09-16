@@ -20,14 +20,14 @@ namespace ApiOpenUniversity.Helpers
 
             };
 
-            if (userAccount.UserName.ToLower() == "admin")
+            if (userAccount.Role.ToLower() == "administrator")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
             }
-            else if (userAccount.UserName.ToLower() == "user1")
+            else if (userAccount.UserName.ToLower() == "user")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "User"));
-                claims.Add(new Claim("UserOnly", "User 1"));
+                claims.Add(new Claim("UserOnly", userAccount.UserName));
             }
 
             return claims;
@@ -77,6 +77,7 @@ namespace ApiOpenUniversity.Helpers
                 userToken.UserName = model.UserName;
                 userToken.Id = model.Id;
                 userToken.GuidId = guidId;
+                userToken.Role = model.Role;
                 return userToken;
 
             }

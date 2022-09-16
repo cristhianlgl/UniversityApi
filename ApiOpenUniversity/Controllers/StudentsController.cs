@@ -8,11 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using ApiOpenUniversity.DataBase;
 using ApiOpenUniversity.Models;
 using ApiOpenUniversity.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ApiOpenUniversity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "User")]
     public class StudentsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -56,6 +61,8 @@ namespace ApiOpenUniversity.Controllers
         // PUT: api/Students/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
             if (id != student.Id)
@@ -87,6 +94,8 @@ namespace ApiOpenUniversity.Controllers
         // POST: api/Students
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
           if (_context.Students == null)
@@ -101,6 +110,8 @@ namespace ApiOpenUniversity.Controllers
 
         // DELETE: api/Students/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             if (_context.Students == null)

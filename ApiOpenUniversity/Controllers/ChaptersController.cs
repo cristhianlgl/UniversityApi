@@ -7,11 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiOpenUniversity.DataBase;
 using ApiOpenUniversity.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ApiOpenUniversity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "User")]
     public class ChaptersController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -53,6 +58,8 @@ namespace ApiOpenUniversity.Controllers
         // PUT: api/Chapters/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> PutChapter(int id, Chapter chapter)
         {
             if (id != chapter.Id)
@@ -84,6 +91,8 @@ namespace ApiOpenUniversity.Controllers
         // POST: api/Chapters
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<ActionResult<Chapter>> PostChapter(Chapter chapter)
         {
           if (_context.Chapters == null)
@@ -98,6 +107,8 @@ namespace ApiOpenUniversity.Controllers
 
         // DELETE: api/Chapters/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> DeleteChapter(int id)
         {
             if (_context.Chapters == null)

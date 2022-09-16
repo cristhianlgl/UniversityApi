@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ApiOpenUniversity.DataBase;
+using ApiOpenUniversity.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ApiOpenUniversity.DataBase;
-using ApiOpenUniversity.Models;
 
 namespace ApiOpenUniversity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "User")]
     public class CoursesController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -53,6 +52,8 @@ namespace ApiOpenUniversity.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
             if (id != course.Id)
@@ -84,6 +85,8 @@ namespace ApiOpenUniversity.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
           if (_context.Courses == null)
@@ -98,6 +101,8 @@ namespace ApiOpenUniversity.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme,
+                 Roles = "Administrator")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             if (_context.Courses == null)

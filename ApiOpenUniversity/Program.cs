@@ -25,6 +25,7 @@ builder.Services.AddControllers();
 
 //4. add services
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 //8. add Authorization
 builder.Services.AddAuthorization(options =>
