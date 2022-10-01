@@ -78,6 +78,7 @@ namespace ApiOpenUniversity.Helpers
                 userToken.Id = model.Id;
                 userToken.GuidId = guidId;
                 userToken.Role = model.Role;
+                userToken.MessageWelcome = model.MessageWelcome;
                 return userToken;
 
             }

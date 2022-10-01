@@ -3,11 +3,14 @@ using ApiOpenUniversity.DataBase;
 using ApiOpenUniversity.ExtensionMethods;
 using ApiOpenUniversity.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//9.  add localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 //2.  Get ConnetionString to settings
 string conn = builder.Configuration.GetConnectionString("default");
@@ -78,6 +81,17 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+// 10.Supported Cultures
+var supportedCultures = new[] { "en-US", "es-ES", "fr-FR", "de-DE" };
+var localizationOptions = new RequestLocalizationOptions()
+                           .SetDefaultCulture(supportedCultures[0])
+                           .AddSupportedCultures(supportedCultures)
+                           .AddSupportedUICultures(supportedCultures);
+
+// 11. add Localization to app
+app.UseRequestLocalization(localizationOptions);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

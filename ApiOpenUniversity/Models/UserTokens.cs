@@ -11,5 +11,6 @@
         public Guid GuidId { get; set; }
         public DateTime ExpiredTime { get; set; }
         public string Role { get; set; } = string.Empty;
+        public string? MessageWelcome { get; set; } = string.Empty;
     }
 }
